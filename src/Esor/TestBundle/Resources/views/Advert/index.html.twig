@@ -6,18 +6,11 @@
  * Time: 12:33
  */
 
-        {# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title> Affichage</title>
-</head>
-<body>
-<h1>Hello World !</h1>
+{% extends "EsorTestBundle::layout.html.twig" %}
 
-<p>
+{% block title %}{{ parent() }} - Index{% endblock %}
 
-</p>
-</body>
-</html>
+{% block body %}
+  Notre plateforme est un peu vide pour le moment, mais cela viendra !
+{% endblock %}
