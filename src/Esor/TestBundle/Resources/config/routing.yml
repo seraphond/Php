@@ -1,0 +1,47 @@
+esor_test_home:
+    path:    /{page}
+    defaults:
+        _controller: EsorTestBundle:Advert:index
+        page:    1
+    requirements:
+        page:    \d*
+esor_test_redi:
+    path:    /redi
+    defaults:
+        _controller:    EsorTestBundle:Advert:redirection
+
+esor_test_view:
+    path:    /advert/{id}
+    defaults:
+        _controller: EsorTestBundle:Advert:view
+    requirements:
+        id:    \d+
+
+esor_test_genRate:
+    path:    /genet
+    defaults:
+        _controller: EsorTestBundle:Advert:genRate
+
+esor_test_view_slug:
+   path:    /{year}/{slug}.{format}
+   defaults:
+       _controller: EsorTestBundle:Advert:viewSlug
+       format:    html
+   requirements:
+       year:    \d4
+       format:    xml|html
+
+esor_test_edit:
+    path:   /edit/{id}
+    defaults:
+        _controller:    
+esor_test_add:
+    path:    /add
+    defaults:    {_controller: EsorTestBundle:Advert:add}
+
+esor_test_delete:
+    path:    /delete/{id}
+    defaults:
+        _controller:    EsorTestBundle:Advert:delete
+    requirements:
+        id:   \d+
