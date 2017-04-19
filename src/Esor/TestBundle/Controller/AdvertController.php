@@ -103,7 +103,7 @@ class AdvertController extends Controller
             throw new NotFoundHttpException("L'annonce d'id " . $id . " n'existe pas");
 
         }
-        $listApplications = $em->getRepository('EsorTestBundle:Advert')->findBy(array('advert' => $advert));
+        $listApplications = $em->getRepository('EsorTestBundle:Application')->findBy(array('advert' => $advert));
         return $this->render('EsorTestBundle:Advert:view.html.twig', array('advert' => $advert, 'listApplications' => $listApplications));
 
     }
@@ -155,6 +155,8 @@ class AdvertController extends Controller
         return $this->redirectToRoute('esor_test_view', array('id' => 5));
 
         */
+        $em = $this->getDoctrine()->getManager();
+
         $advert = new Advert();
         $advert->setTitre('Recherche dev symfony');
         $advert->setAuteur('Seraph');
@@ -170,15 +172,18 @@ class AdvertController extends Controller
         // On lie l'image à l'annonce
         $advert->setImage($image);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($advert);
-        $em->flush();
 
 
         // 1er candidature
         $application1 = new Application();
         $application1->setAuthor('Quelqun');
         $application1->setContent("j'apporte les croissants");
+        $application1->setAdvert($advert);
+
+        $em->persist($advert);
+        $em->persist($application1);
+
+
 
         // 2eme
         $application2 = new Application();
@@ -186,15 +191,15 @@ class AdvertController extends Controller
         $application2->setContent("j'apporte les pains aux chocolats");
 
         //on lie les candidatures a l'annonce
-        $application1->getAdvert($advert);
+        // $application1->getAdvert($advert);
         $application2->setAdvert($advert);
 
         // On récupère l'EntityManager
-        $em = $this->getDoctrine()->getManager();
+        // $em = $this->getDoctrine()->getManager();
 
         // Étape 1 : On « persiste » l'entité
-        $em->persist($advert);
-        $em->persist($application1);
+
+
         $em->persist($application2);
 
 
