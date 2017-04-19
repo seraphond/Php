@@ -1,16 +1,27 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: erwan
- * Date: 18/04/17
- * Time: 12:33
- */
-
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
 
 {% extends "EsorTestBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - Index{% endblock %}
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
 
-{% block body %}
-  Notre plateforme est un peu vide pour le moment, mais cela viendra !
+{% block esor_test_body %}
+
+    <h2>Liste des annonces</h2>
+
+    <ul>
+        {% for advert in listAdverts %}
+            <li>
+                <a href="{{ path('esor_test_view', {'id': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+                par {{ advert.author }},
+                le {{ advert.date|date('d/m/Y') }}
+            </li>
+        {% else %}
+            <li>Pas (encore !) d'annonces</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

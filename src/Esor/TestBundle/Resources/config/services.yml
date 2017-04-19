@@ -2,3 +2,11 @@ services:
 #    esor_test.example:
 #        class: Esor\TestBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    Esor_Test.antispam:
+        class: Esor\TestBundle\antispam\antispam
+        arguments:
+            - "@mailer"
+            - 50
+
+#parameters:
+ #   mon_param: ma_val

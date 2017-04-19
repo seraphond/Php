@@ -39,7 +39,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        Var: %global_var%
+        bar: 42
 
 # Doctrine Configuration
 doctrine:
