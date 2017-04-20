@@ -34,7 +34,11 @@ esor_test_view_slug:
 esor_test_edit:
     path:   /edit/{id}
     defaults:
-        _controller:    
+        _controller:  EsorTestBundle:Advert:edit
+    requirements:
+        id:   \d+
+
+
 esor_test_add:
     path:    /add
     defaults:    {_controller: EsorTestBundle:Advert:add}
