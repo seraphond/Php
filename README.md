@@ -13,3 +13,7 @@ http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic
 Querry Builder :
 
  http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html
+ 
+ DQl :
+ 
+ http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/dql-doctrine-query-language.html
