@@ -1,0 +1,49 @@
+Les conditions en twig
+
+{% if membre.age < 12 %}
+    Il faut avoir au moins 12 ans pour ce film.
+{% elseif membre.age < 18 %}
+    OK bon film.
+{% else %}
+    Un peu vieux pour voir ce film non ?
+{% endif %}
+
+
+Les for
+
+<ul>
+    {% for membre in liste_membres %}
+        <li>{{ membre.pseudo }}</li>
+    {% else %}
+        <li>Pas d'utilisateur trouvé.</li>
+    {% endfor %}
+</ul>
+
+ou encore
+
+<select>
+    {% for valeur, option in liste_options %}
+        <option value="{{ valeur }}">{{ option }}</option>
+    {% endfor %}
+</select>
+
+
+Définition : {% set %}
+
+{% set foo = 'bar' %}
+
+
+Defined
+
+Pour vérifier si une variable existe.
+
+{% if var is defined %} … {% endif %}
+
+Even/Odd (test pair/impair)
+
+{% for valeur in liste %}
+    <span class="{% if loop.index is even %}pair{% else %}
+    impair{% endif %}">
+    {{ valeur }}
+  </span>
+{% endfor %}
