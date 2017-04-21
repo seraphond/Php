@@ -7,6 +7,7 @@
  */
 
 namespace Esor\TestBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Esor\TestBundle\Repository\CategoryRepository")

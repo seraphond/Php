@@ -24,12 +24,12 @@ class AdvertType extends AbstractType
     {
         //$pattern = 'D%';
         $builder
-            ->add('date', DateTimeType::class)
-            ->add('titre', TextType::class)
-            ->add('auteur', TextType::class)
-            ->add('contenu', TextareaType::class)
+            ->add('date', DateTimeType::class, ['attr' => ['class' => 'form_control']])
+            ->add('titre', TextType::class, ['label' => 'Titre de l\' annonce','attr' => ['class' => 'form_control']])
+            ->add('auteur', TextType::class, ['attr' => ['class' => 'form_control']])
+            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'form_control']])
             //->add('published', CheckboxType::class, array('required' => false))
-            ->add('image', ImageType::class, array('required' => false))
+            ->add('image', ImageType::class, array('required' => false) )
             /*
              *  Rappel :
  ** - 1er argument : nom du champ, ici « categories », car c'est le nom de l'attribut

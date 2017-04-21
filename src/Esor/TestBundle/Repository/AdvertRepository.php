@@ -1,6 +1,7 @@
 <?php
 
 namespace Esor\TestBundle\Repository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * AdvertRepository
