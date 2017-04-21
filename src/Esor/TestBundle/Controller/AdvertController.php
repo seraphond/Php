@@ -24,19 +24,16 @@ class AdvertController extends Controller
 {
 
 
-    public function indexAction($page)
+    public function indexAction($page, Request $request)
     {
+        //print_r($page);
 
-        /*if ($page < 1) {
-            throw new NotFoundHttpException('Page "' . $page . '"inexistante');
+       // $contenu = $this->get('templating')->render('EsorTestBundle:Advert:index.html.twig');
 
-        }
-        $contenu = $this->get('templating')->render('EsorTestBundle:Advert:index.html.twig');
-
-        return new Response($contenu);*/
+       // return new Response($contenu);
         // Notre liste d'annonce en dur
 
-        $listAdverts = array(
+       /* $listAdverts = array(
             array(
                 'title' => 'Recherche développpeur Symfony',
                 'id' => 1,
@@ -59,6 +56,35 @@ class AdvertController extends Controller
         return $this->render('EsorTestBundle:Advert:index.html.twig', array(
 
             'listAdverts' => $listAdverts));
+       */
+        if ($page < 1) {
+            throw new NotFoundHttpException('Page "' . $page . '"inexistante');
+
+        }
+
+        $nbPerPage = 5;
+
+        // On récupère notre objet Paginator
+        $listAdverts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('EsorTestBundle:Advert')
+            ->getAdverts($page, $nbPerPage);
+
+
+       // $temp=$this->getDoctrine()->getManager()->getRepository('EsorTestBundle:Advert')->getAdverts($page,$nbPerPage);
+        //$pagination=$temp[0]->paginate($temp[1],$request->query->get('page',$page),$nbPerPage);
+        // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+        $nbPages = ceil(count($listAdverts) / $nbPerPage);
+
+
+
+        // Si la page n'existe pas, on retourne une 404
+
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
+        return $this->render('EsorTestBundle:Advert:index.html.twig',array('listAdverts' => $listAdverts,'nbPages' => $nbPages,'page' => $page));
 
     }
 
@@ -68,6 +94,8 @@ class AdvertController extends Controller
       return new Response("Affichage de l'annonce d'id : ".$id.", avec le tag : ".$tag);*/
     //return new Response("Affichage de id: ".$id);
     //return $this->render('EsorTestBundle:Advert:view.html.twig', array('id' => $id));
+
+
     public function viewAction($id)
     {
         /* $advert = array(
@@ -252,46 +280,47 @@ class AdvertController extends Controller
     }
 
 
-    public function deleteAction($id)
-
+    public function deleteAction($id , Request $request)
     {
-
-
         $em = $this->getDoctrine()->getManager();
 
 
         // On récupère l'annonce $id
-
         $advert = $em->getRepository('EsorTestBundle:Advert')->find($id);
-
-
         if (null === $advert) {
-
             throw new NotFoundHttpException("L'annonce d'id " . $id . " n'existe pas.");
-
         }
 
 
-        // On boucle sur les catégories de l'annonce pour les supprimer
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
 
-        foreach ($advert->getCategories() as $category) {
+        $form = $this->get('form.factory')->create();
 
-            $advert->removeCategory($category);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->remove($advert);
+            $em->flush();
+            // On boucle sur les catégories de l'annonce pour les supprimer
+            /* foreach ($advert->getCategories() as $category) {
+                 $advert->removeCategory($category);
+             }
+     */
+
+            // Pour persister le changement dans la relation, il faut persister l'entité propriétaire
+
+            // Ici, Advert est le propriétaire, donc inutile de la persister car on l'a récupérée depuis Doctrine
+
+
+            // On déclenche la modification
+
+
+            return $this->render('@EsorTest/Advert/index.html.twig');
 
         }
 
-
-        // Pour persister le changement dans la relation, il faut persister l'entité propriétaire
-
-        // Ici, Advert est le propriétaire, donc inutile de la persister car on l'a récupérée depuis Doctrine
-
-
-        // On déclenche la modification
-
-        $em->flush();
-
-        return $this->render('EsorTestBundle:Advert:delete.html.twig');
-
+        return $this->render('@EsorTest/Advert/delete.html.twig', array(
+            'advert' => $advert,
+            'form'   => $form->createView()));
     }
 
 
