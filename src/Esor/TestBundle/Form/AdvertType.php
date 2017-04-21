@@ -24,10 +24,10 @@ class AdvertType extends AbstractType
     {
         //$pattern = 'D%';
         $builder
-            ->add('date', DateTimeType::class, ['attr' => ['class' => 'form_control']])
-            ->add('titre', TextType::class, ['label' => 'Titre de l\' annonce','attr' => ['class' => 'form_control']])
-            ->add('auteur', TextType::class, ['attr' => ['class' => 'form_control']])
-            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'form_control']])
+            //->add('date', DateTimeType::class, ['attr' => ['class' => 'form-control']])
+            ->add('titre', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('auteur', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'form-control']])
             //->add('published', CheckboxType::class, array('required' => false))
             ->add('image', ImageType::class, array('required' => false) )
             /*
