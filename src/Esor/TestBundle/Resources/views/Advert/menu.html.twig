@@ -1,9 +1,12 @@
 <ul class="nav nav-pills nav-stacked">
+
+
     {% for advert in listAdverts %}
         <li>
             <a href="{{ path('esor_test_view', {'id': advert.id}) }}">
-                {{ advert.title }}
+                {{ advert.titre }}
             </a>
         </li>
     {% endfor %}
+
 </ul>

@@ -370,7 +370,7 @@ class AdvertController extends Controller
     {
         // On fixe en dur une liste ici, bien entendu par la suite
         // on la récupérera depuis la BDD !
-        $listAdverts = array(
+       /* $listAdverts = array(
             array('id' => 2, 'title' => 'Recherche développeur Symfony'),
             array('id' => 5, 'title' => 'Mission de webmaster'),
             array('id' => 9, 'title' => 'Offre de stage webdesigner')
@@ -381,6 +381,17 @@ class AdvertController extends Controller
             // les variables nécessaires au template !
             'listAdverts' => $listAdverts
         ));
+
+
+*/
+        $em = $this->getDoctrine()->getManager();
+        $listAdverts = $em->getRepository('EsorTestBundle:Advert')->findBy(array(),array('date' => 'desc'),4);
+        if (null === $listAdverts) {
+            throw new NotFoundHttpException("Il n\' y a pas d\'annonce.");
+
+        }
+       return $this->render('EsorTestBundle:Advert:menu.html.twig',array('listAdverts' => $listAdverts));
+
     }
 
 }

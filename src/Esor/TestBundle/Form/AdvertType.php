@@ -25,9 +25,9 @@ class AdvertType extends AbstractType
         //$pattern = 'D%';
         $builder
             //->add('date', DateTimeType::class, ['attr' => ['class' => 'form-control']])
-            ->add('titre', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('auteur', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('contenu', TextareaType::class, ['attr' => ['class' => 'form-control']])
+            ->add('titre', TextType::class)
+            ->add('auteur', TextType::class)
+            ->add('contenu', TextareaType::class)
             //->add('published', CheckboxType::class, array('required' => false))
             ->add('image', ImageType::class, array('required' => false) )
             /*
@@ -52,7 +52,7 @@ class AdvertType extends AbstractType
                     return $repository->getLikeQueryBuilder($pattern);
                 }*/
             ))
-            ->add('save', SubmitType::class);
+            ->add('Envoyer', SubmitType::class);
 
         // On ajoute une fonction qui va écouter un évènement
         $builder->addEventListener(
