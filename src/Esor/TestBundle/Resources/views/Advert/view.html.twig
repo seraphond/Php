@@ -9,7 +9,10 @@
 {% block esor_test_body %}
 
     {% if advert.image is not null %}
-        <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+        <img
+                src="{{ asset(advert.image.webPath) }}"
+                alt="{{ advert.image.alt }}"
+        />
     {% endif %}
     <h2>{{ advert.titre }}</h2>
     <i>Par {{ advert.auteur }}, le {{ advert.date|date('d/m/Y') }}</i>

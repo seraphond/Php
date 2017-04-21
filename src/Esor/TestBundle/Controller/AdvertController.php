@@ -11,6 +11,7 @@ namespace Esor\TestBundle\Controller;
 
 
 use Esor\TestBundle\Entity\Advert;
+use Esor\TestBundle\Form\AdvertEditType;
 use Esor\TestBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -133,22 +134,18 @@ class AdvertController extends Controller
 
     public function addAction(Request $request)
     {
-
-
         // On crée un objet Advert
         $advert = new Advert();
-
         $form = $this->get('form.factory')->create(AdvertType::class, $advert);
-
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
             // On fait le lien Requête <-> Formulaire
             // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
             $form->handleRequest($request);
-
             // On vérifie que les valeurs entrées sont correctes
             // (Nous verrons la validation des objets en détail dans le prochain chapitre)
             if ($form->isValid()) {
+                /* $advert->getImage()->upload();*/ // plus utile maintenant que c'est géré par événements
                 // On enregistre notre objet $advert dans la base de données, par exemple
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($advert);
@@ -320,26 +317,47 @@ class AdvertController extends Controller
         }
 
         // La méthode findAll retourne toutes les catégories de la base de données
-        $listCategories = $em->getRepository('EsorTestBundle:Category')->findAll();
+        /*$listCategories = $em->getRepository('EsorTestBundle:Category')->findAll();*/ //nope
 
         // On boucle sur les catégories pour les lier à l'annonce
-        foreach ($listCategories as $category) {
-            $advert->addCategory($category);
+        /*  foreach ($listCategories as $category) {
+              $advert->addCategory($category);
+          }
+          */
+
+        $form = $this->get('form.factory')->create(AdvertEditType::class, $advert);
+        // Si la requête est en POST
+        if ($request->isMethod('POST')) {
+            // On fait le lien Requête <-> Formulaire
+            // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
+            $form->handleRequest($request);
+            // On vérifie que les valeurs entrées sont correctes
+            // (Nous verrons la validation des objets en détail dans le prochain chapitre)
+            if ($form->isValid()) {
+                /* $advert->getImage()->upload();*/ // plus utile maintenant que c'est géré par événements
+                // On enregistre notre objet $advert dans la base de données, par exemple
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($advert);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+                // On redirige vers la page de visualisation de l'annonce nouvellement créée
+                return $this->redirectToRoute('esor_test_view', array('id' => $advert->getId()));
+            }
         }
+
+        // À ce stade, le formulaire n'est pas valide car :
+        // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+        // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+        return $this->render('EsorTestBundle:Advert:edit.html.twig', array('advert' => $advert, 'form' => $form->createView(),
+        ));
 
         // Pour persister le changement dans la relation, il faut persister l'entité propriétaire
         // Ici, Advert est le propriétaire, donc inutile de la persister car on l'a récupérée depuis Doctrine
 
         // Étape 2 : On déclenche l'enregistrement
         $em->flush();
-
-        $advert = array(
-            'title' => 'Recherche développpeur Symfony',
-            'id' => $id,
-            'author' => 'Alexandre',
-            'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
-            'date' => new \Datetime()
-        );
 
         return $this->render('EsorTestBundle:Advert:edit.html.twig', array(
             'advert' => $advert
