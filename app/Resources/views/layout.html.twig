@@ -25,7 +25,13 @@
         </p>
 
     </div>
-
+    <div>
+        {% if app.user.username is defined  %}
+            <button onclick="self.location.href='{{  path('logout') }}'" type="button" class="btn btn-danger">Logout</button>
+        {% else %}
+            <button onclick="self.location.href='{{  path('login') }}'" type="button" class="btn btn-success">Login</button>
+        {% endif %}
+    </div>
     <div class="row">
         <div id="menu" class="col-md-3">
             <h3>Les annonces</h3>

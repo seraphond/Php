@@ -29,7 +29,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->createQueryBuilder('a')
             ->leftJoin('a.image', 'i')
             ->addSelect('i')
-            ->leftJoin('a.categories', 'c')
+            ->leftJoin('a.categories',  'c')
             ->addSelect('c')
             ->orderBy('a.date', 'DESC')
             ->getQuery();

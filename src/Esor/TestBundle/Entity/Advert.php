@@ -3,6 +3,9 @@
 namespace Esor\TestBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Advert
@@ -35,6 +38,7 @@ class Advert
     private $categories;
     /**
      * @ORM\OneToOne(targetEntity="Esor\TestBundle\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\Valid()
      * @ORM\JoinColumn(nullable=true)
      */
     private $image; // Notez le « s », une annonce est liée à plusieurs candidatures
@@ -46,27 +50,29 @@ class Advert
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+
     /**
      * @var \DateTime
-     *
+     *@Assert\DateTime()
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
     /**
      * @var string
-     *
+     * @Assert\Length(min=10)
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
     /**
      * @var string
-     *
+     * @Assert\Length(min=2)
      * @ORM\Column(name="auteur", type="string", length=255)
      */
     private $auteur;
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="contenu", type="text")
      */
     private $contenu;

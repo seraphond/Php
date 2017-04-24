@@ -57,6 +57,11 @@ class AdvertController extends Controller
 
             'listAdverts' => $listAdverts));
        */
+
+
+
+
+
         if ($page < 1) {
             throw new NotFoundHttpException('Page "' . $page . '"inexistante');
 
@@ -71,7 +76,7 @@ class AdvertController extends Controller
             ->getAdverts($page, $nbPerPage);
 
 
-       // $temp=$this->getDoctrine()->getManager()->getRepository('EsorTestBundle:Advert')->getAdverts($page,$nbPerPage);
+       // $temp=$thivar/cache/devs->getDoctrine()->getManager()->getRepository('EsorTestBundle:Advert')->getAdverts($page,$nbPerPage);
         //$pagination=$temp[0]->paginate($temp[1],$request->query->get('page',$page),$nbPerPage);
         // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
         $nbPages = ceil(count($listAdverts) / $nbPerPage);
@@ -314,7 +319,9 @@ class AdvertController extends Controller
             // On déclenche la modification
 
 
-            return $this->render('@EsorTest/Advert/index.html.twig');
+            $url = $this->get('router')->generate('esor_test_home');
+
+            return new RedirectResponse($url);
 
         }
 
@@ -421,6 +428,25 @@ class AdvertController extends Controller
         }
        return $this->render('EsorTestBundle:Advert:menu.html.twig',array('listAdverts' => $listAdverts));
 
+    }
+
+    public function testAction(){
+        $advert = new Advert;
+        $advert->setDate(new \Datetime());  // Champ « date » OK
+        $advert->setTitle('abc');           // Champ « title » incorrect : moins de 10 caractères
+        //$advert->setContent('blabla');    // Champ « content » incorrect : on ne le définit pas
+        $advert->setAuthor('A');            // Champ « author » incorrect : moins de 2 caractères
+        // On récupère le service validator
+        $validator = $this->get('validator');
+        // On déclenche la validation sur notre object
+        $listErrors = $validator->validate($advert);
+        // Si $listErrors n'est pas vide, on affiche les erreurs
+        if(count($listErrors) > 0) {
+            // $listErrors est un objet, sa méthode __toString permet de lister joliement les erreurs
+            return new Response((string) $listErrors);
+        } else {
+            return new Response("L'annonce est valide !");
+        }
     }
 
 }

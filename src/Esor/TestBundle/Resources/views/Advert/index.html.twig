@@ -8,6 +8,10 @@
 
 {% block esor_test_body %}
 
+    {% if app.user.username is defined  %}
+    <p>Bonjour {{ app.user.username }}</p>
+
+    {% endif  %}
     <h2>Liste des annonces</h2>
 
     <ul>

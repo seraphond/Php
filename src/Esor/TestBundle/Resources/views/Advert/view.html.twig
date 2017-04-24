@@ -42,20 +42,29 @@
         </ul>
 
     </div>
-    </br>
+    <br/>
     <p>
-        <a href="{{ path('esor_test_home') }}" class="btn btn-default">
+        <a name="chocolat" href="{{ path('esor_test_home') }}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>
             Retour à la liste
         </a>
-        <a href="{{ path('esor_test_edit', {'id': advert.id}) }}" class="btn btn-default">
+            {% if app.user %}
+            {% if app.user.username == advert.auteur %}
+
+        <a  href="{{ path('esor_test_edit', {'id': advert.id}) }}" class="btn btn-default" >
             <i class="glyphicon glyphicon-edit"></i>
             Modifier l'annonce
         </a>
+
+
         <a href="{{ path('esor_test_delete', {'id': advert.id}) }}" class="btn btn-danger">
             <i class="glyphicon glyphicon-trash"></i>
             Supprimer l'annonce
         </a>
+
+
+        {% endif %}
+        {% endif %}
     </p>
 
 {% endblock %}
