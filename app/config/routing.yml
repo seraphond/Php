@@ -6,15 +6,15 @@ esor_test:
     resource: "@EsorTestBundle/Resources/config/routing.yml"
     prefix:   /platform
 
-login:
+fos_user_security_login:
     path: /login
     defaults:
-        _controller: EsorUserBundle:Security:login
+            _controller: "@FOSUserBundle/Resources/Security/LoginManager.php"
 
-login_check:
+fos_user_security_check:
     path: /login_check
 
-logout:
+fos_user_security_logout:
     path: /logout
 #app:
  #   resource: '@AppBundle/Controller/'
@@ -29,12 +29,12 @@ fos_user_profile:
     prefix: /profile
 
 
-fos_user_register:
+fos_user_registration_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /register
 
 
-fos_user_resetting:
+fos_user_resetting_request:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
 

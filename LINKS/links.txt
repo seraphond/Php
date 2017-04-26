@@ -1,0 +1,11 @@
+#Portal CGI
+https://weblinks.nl.cgi.com/dana-na/auth/url_12/welcome.cgi
+
+#App mail CGI
+https://mail.logica.com/CookieAuth.dll?GetLogon?curl=Z2FowaZ2FZ3FaeZ3DFolderZ26tZ3DIPF.Note&reason=0&formdir=1
+
+#App mail Auchan
+https://outlook.office.com/owa/
+
+#Confluence
+https://confluence.auchan.net/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D9079844&permissionViolation=true

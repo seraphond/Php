@@ -26,6 +26,7 @@ class AdvertController extends Controller
 
     public function indexAction($page, Request $request)
     {
+
         //print_r($page);
 
        // $contenu = $this->get('templating')->render('EsorTestBundle:Advert:index.html.twig');

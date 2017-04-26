@@ -27,9 +27,12 @@
     </div>
     <div>
         {% if app.user.username is defined  %}
-            <button onclick="self.location.href='{{  path('logout') }}'" type="button" class="btn btn-danger">Logout</button>
+            <button onclick="self.location.href='{{  path('fos_user_security_logout') }}'" type="button" class="btn btn-danger">Logout</button>
         {% else %}
-            <button onclick="self.location.href='{{  path('login') }}'" type="button" class="btn btn-success">Login</button>
+            <button onclick="self.location.href='{{  path('fos_user_security_login') }}'" type="button" class="btn btn-success">Login</button>
+            <button onclick="self.location.href='{{  path('fos_user_registration_register') }}'" type="button" class="btn btn-info">S'inscrire</button>
+        <br/>
+            <button onclick="self.location.href='{{  path('fos_user_resetting_request') }}" type="button" class="btn btn-link">Mot de passe oublié?</button>
         {% endif %}
     </div>
     <div class="row">
