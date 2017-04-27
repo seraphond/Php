@@ -41,7 +41,7 @@ class Advert
      * @Assert\Valid()
      * @ORM\JoinColumn(nullable=true)
      */
-    private $image; // Notez le « s », une annonce est liée à plusieurs candidatures
+    private $image;
     /**
      * @var int
      *

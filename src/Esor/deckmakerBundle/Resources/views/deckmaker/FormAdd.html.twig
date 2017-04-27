@@ -1,0 +1,16 @@
+<h3>Formulaire de carte</h3>
+
+<div class="well">
+    {{ form_start(form, {'attr': {'class' : 'form-horizontal'}}) }}
+    {{  form_errors(form) }}
+
+    {{ form_row(form.titre) }}
+    {{ form_row(form.cout) }}
+    {{ form_row(form.image,{'attr': {'class': 'col-sm-2'}})}}
+    {{ form_row (form.type) }}
+    {{form_row(form.Couleur)}}
+
+    {{ form_widget(form.Envoyer, {'attr': {'class': 'btn btn-primary bnt-lg'}}) }}
+    {{ form_rest(form) }}
+    {{form_end(form)}}
+</div>

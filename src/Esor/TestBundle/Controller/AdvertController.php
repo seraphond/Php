@@ -11,6 +11,7 @@ namespace Esor\TestBundle\Controller;
 
 
 use Esor\TestBundle\Entity\Advert;
+use Esor\deckmakerBundle\Controller as deck;
 use Esor\TestBundle\Form\AdvertEditType;
 use Esor\TestBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

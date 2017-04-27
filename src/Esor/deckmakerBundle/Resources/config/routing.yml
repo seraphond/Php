@@ -1,3 +1,9 @@
 esordeckmaker_homepage:
     path:     /
-    defaults: { _controller: EsordeckmakerBundle:Default:index }
+    defaults:
+        _controller: EsordeckmakerBundle:Default:index
+
+esordeckmaker_addcard:
+    path: /addCard
+    defaults:
+        _controller: EsordeckmakerBundle:deckmaker:addCard

@@ -8,6 +8,9 @@
 
 namespace Esor\deckmakerBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Card
@@ -50,16 +53,146 @@ class Card
     private $image;
 
     /**
-     * @var string
+     * @var array
      * @Assert\Length(min=1)
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="couleur", type="string", length=255)
      */
     private $couleur;
 
     /**
-     * @var string
+     * @var array
      * @Assert\Length(min=1)
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Card
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set cout
+     *
+     * @param integer $cout
+     *
+     * @return Card
+     */
+    public function setCout($cout)
+    {
+        $this->cout = $cout;
+
+        return $this;
+    }
+
+    /**
+     * Get cout
+     *
+     * @return integer
+     */
+    public function getCout()
+    {
+        return $this->cout;
+    }
+
+    /**
+     * Set couleur
+     *
+     * @param string $couleur
+     *
+     * @return Card
+     */
+    public function setCouleur($couleur)
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    /**
+     * Get couleur
+     *
+     * @return string
+     */
+    public function getCouleur()
+    {
+        return $this->couleur;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Card
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Esor\TestBundle\Entity\Image $image
+     *
+     * @return Card
+     */
+    public function setImage(\Esor\TestBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Esor\TestBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }
