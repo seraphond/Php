@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Esor\TestBundle\EsorTestBundle(),
             new Esor\UserBundle\EsorUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Esor\deckmakerBundle\EsordeckmakerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

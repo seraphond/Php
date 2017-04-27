@@ -1,0 +1,3 @@
+esordeckmaker_homepage:
+    path:     /
+    defaults: { _controller: EsordeckmakerBundle:Default:index }

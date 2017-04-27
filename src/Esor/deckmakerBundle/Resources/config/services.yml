@@ -1,0 +1,4 @@
+services:
+#    esordeckmaker.example:
+#        class: Esor\deckmakerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

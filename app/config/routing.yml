@@ -1,3 +1,7 @@
+esordeckmaker:
+    resource: "@EsordeckmakerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 esor_user:
     resource: "@EsorUserBundle/Resources/config/routing.yml"
     prefix:   /
